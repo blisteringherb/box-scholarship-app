@@ -13,7 +13,7 @@
         - npm
 
     - name: Install NPM build tools
-      npm: name={{ item }}
+      npm: name={{ item }} global=yes
       with_items:
         - bower
         - gulp-imagemin
