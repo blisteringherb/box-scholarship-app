@@ -4,6 +4,7 @@
     - name: General | Install required packages.
       apt: name={{ item }} state=latest
       tags: common
+      update_cache: yes
       with_items:
         - php5-mcrypt
         - php5-fpm
