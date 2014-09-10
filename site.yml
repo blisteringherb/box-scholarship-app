@@ -12,6 +12,9 @@
         - ruby
         - npm
 
+    - name: Composer | Install PHP Composer
+      action: shell curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
       with_items:
