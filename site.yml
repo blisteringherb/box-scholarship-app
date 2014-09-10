@@ -5,11 +5,9 @@
       apt: name={{ item }} state=latest
       tags: common
       with_items:
-        - php5-mysql
         - php5-mcrypt
         - php5-fpm
         - php5-cli
-        - nginx
         - git
         - ruby
 
