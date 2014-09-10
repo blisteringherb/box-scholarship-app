@@ -11,6 +11,6 @@ keywords:
   - bower
   - gulp
 packages:
-  - scholarship@0.0.1
+  - scholarship@0.0.2
 script: |
     sudo ansible-playbook -v site.yml -i inventory.ini -c local
