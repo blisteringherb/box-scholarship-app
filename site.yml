@@ -12,9 +12,6 @@
         - ruby
         - npm
 
-    - name: Install packages based on package.json.
-      npm: path=/var/www/scholarship-application-app
-
     - name: Install NPM build tools
       npm: name={{ item }}
       with_items:
