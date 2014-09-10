@@ -10,6 +10,7 @@
         - php5-cli
         - git
         - ruby
+        - npm
 
     - name: Install packages based on package.json.
       npm: path=/var/www/scholarship-application-app
