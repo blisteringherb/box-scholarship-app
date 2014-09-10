@@ -2,9 +2,8 @@
 - hosts: localhost
   tasks:
     - name: General | Install required packages.
-      apt: name={{ item }} state=latest
+      apt: name={{ item }} state=latest update_cache=yes
       tags: common
-      update_cache: yes
       with_items:
         - php5-mcrypt
         - php5-fpm
