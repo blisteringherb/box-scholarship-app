@@ -14,15 +14,15 @@
         - git
         - ruby
 
-      - name: Install packages based on package.json.
-        npm: path=/var/www/scholarship-application-app
+    - name: Install packages based on package.json.
+      npm: path=/var/www/scholarship-application-app
 
-      - name: Install NPM build tools
-        npm: name={{ item }}
-        with_items:
-          - bower
-          - gulp-imagemin
-          - gulp
+    - name: Install NPM build tools
+      npm: name={{ item }}
+      with_items:
+        - bower
+        - gulp-imagemin
+        - gulp
 
-      - name: Install bundler
-        gem: name=bundler
+    - name: Install bundler
+      gem: name=bundler
