@@ -1,0 +1,16 @@
+name: scholarship
+version: 0.0.1
+inherits: typester/ubuntu14.04-ansible@1.6.6
+type: service
+platform: ubuntu@12.04
+description: wercker box for dosomething scholarship app
+keywords:
+  - php5
+  - composer
+  - npm
+  - bower
+  - gulp
+packages:
+  - scholarship@0.0.1
+script: |
+    sudo ansible-playbook -v site.yml -i inventory.ini -c local

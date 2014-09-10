@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  tasks:
+    - name: General | Install required packages.
+      apt: name={{ item }} state=latest
+      tags: common
+      with_items:
+        - php5
+        - php5-mysql
+        - php5-mcrypt
+        - php5-fpm
+        - php5-cli
+        - nginx
+        - git
+        - ruby
+
+      - name: Install packages based on package.json.
+        npm: path=/var/www/scholarship-application-app
+
+      - name: Install NPM build tools
+        npm: name={{ item }}
+        with_items:
+          - bower
+          - gulp-imagemin
+          - gulp
+
+      - name: Install bundler
+        gem: name=bundler
