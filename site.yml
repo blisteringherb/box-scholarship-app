@@ -1,9 +1,11 @@
 ---
 - hosts: localhost
+  remote_user: ubuntu
   tasks:
     - name: General | Install required packages.
       apt: name={{ item }} state=latest update_cache=yes
       tags: common
+      sudo: yes
       with_items:
         - php5-mcrypt
         - php5-fpm
@@ -21,12 +23,14 @@
 
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
+      sudo: yes
       with_items:
         - bower
         - gulp-imagemin
         - gulp
 
     - name: symlink Node
+      sudo: yes
       file: path=/usr/bin/node src=/usr/bin/nodejs state=link
 
     - name: Install bundler
