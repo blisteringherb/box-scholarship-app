@@ -12,6 +12,9 @@
         - ruby
         - npm
 
+    - name: Enable php5-mcrypt
+      action: shell sudo php5enmod mcrypt
+
     - name: Composer | Install PHP Composer
       action: shell curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
