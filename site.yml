@@ -11,6 +11,7 @@
         - git
         - ruby
         - npm
+        #- redis
 
     - name: Enable php5-mcrypt
       action: shell sudo php5enmod mcrypt
@@ -25,5 +26,10 @@
         - gulp-imagemin
         - gulp
 
+    - name: symlink Node
+      file: path=/usr/bin/node src=/usr/bin/nodejs state=link
+
     - name: Install bundler
       gem: name=bundler
+
+
