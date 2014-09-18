@@ -10,13 +10,17 @@
         - php5-mcrypt
         - php5-fpm
         - php5-cli
+        - php5-curl
         - git
         - ruby
         - npm
         #- redis
 
-    - name: Enable php5-mcrypt
-      action: shell sudo php5enmod mcrypt
+    - name: Enable php5-extensions
+      action: shell sudo php5enmod {{ item }}
+      with_items:
+        - mcrypt
+        - curl
 
     - name: Composer | Install PHP Composer
       action: shell curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
