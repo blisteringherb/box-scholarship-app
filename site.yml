@@ -13,6 +13,8 @@
         - php5-curl
         - git
         - ruby
+        - build-essential
+        - libssl-dev
         #- redis
 
     - name: Enable php5-extensions
@@ -35,7 +37,7 @@
         creates=/home/{{ ansible_user_id }}/.nvm/alias
 
     - name: Debugging
-      shell: node -v
+      shell: whoami && which node && ls -la /home/ubuntu
 
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
