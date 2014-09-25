@@ -34,6 +34,9 @@
         /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 0.10 && nvm alias default 0.10"
         creates=/home/{{ ansible_user_id }}/.nvm/alias
 
+    - name: Debugging
+      shell: node -v
+
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
       with_items:
