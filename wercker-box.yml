@@ -1,5 +1,5 @@
 name: scholarship
-version: 0.0.12
+version: 0.0.7
 inherits: typester/ubuntu14.04-ansible@1.6.6
 type: service
 platform: ubuntu@12.04
@@ -13,4 +13,4 @@ keywords:
 packages:
   - scholarship@0.0.10
 script: |
-    sudo ansible-playbook -v site.yml -i inventory.ini -c local
+    sudo ansible-playbook -vvvv site.yml -i inventory.ini -c local
