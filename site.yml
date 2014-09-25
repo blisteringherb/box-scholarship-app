@@ -39,8 +39,14 @@
 
     - name: Debugging
       shell: whoami
+      register: whoami
+
+    - name: debug
+      debug: var=whoami
 
     - name: Install NPM build tools
+      su: true
+      su_user: ubuntu
       npm: name={{ item }} global=yes
       with_items:
         - bower
