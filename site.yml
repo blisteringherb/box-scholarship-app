@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   remote_user: ubuntu
+  user: ubuntu
   tasks:
     - name: General | Install required packages.
       apt: name={{ item }} state=latest update_cache=yes
@@ -37,7 +38,7 @@
         creates=/home/{{ ansible_user_id }}/.nvm/alias
 
     - name: Debugging
-      shell: whoami && which node && ls -la /home/ubuntu
+      shell: whoami
 
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
