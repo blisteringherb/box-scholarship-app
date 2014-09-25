@@ -1,5 +1,5 @@
 name: scholarship
-version: 0.0.7
+version: 0.0.8
 inherits: typester/ubuntu14.04-ansible@1.6.6
 type: service
 platform: ubuntu@12.04
@@ -11,6 +11,6 @@ keywords:
   - bower
   - gulp
 packages:
-  - scholarship@0.0.7
+  - scholarship@0.0.8
 script: |
     sudo ansible-playbook -v site.yml -i inventory.ini -c local
