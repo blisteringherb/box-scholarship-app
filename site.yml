@@ -28,7 +28,7 @@
       action: shell curl https://raw.githubusercontent.com/creationix/nvm/v0.17.0/install.sh | bash
 
     - name: Load nvm
-      action: shell . ~/.nvm
+      action: shell . /home/ubuntu/.nvm && . /home/ubuntu/.bashrc
 
     - name: Install Node and NPM
       action: shell nvm install 0.10
