@@ -36,6 +36,10 @@
       shell: >
         /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 0.10 && nvm alias default 0.10"
         creates=/home/{{ ansible_user_id }}/.nvm/alias
+      register: node-install
+
+    - name: Node install debug
+      debug: node-install
 
     - name: Debugging
       shell: whoami
@@ -45,8 +49,6 @@
       debug: var=whoami
 
     - name: Install NPM build tools
-      su: true
-      su_user: ubuntu
       npm: name={{ item }} global=yes
       with_items:
         - bower
