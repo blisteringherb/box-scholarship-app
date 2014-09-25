@@ -13,7 +13,6 @@
         - php5-curl
         - git
         - ruby
-        - npm
         #- redis
 
     - name: Enable php5-extensions
@@ -25,17 +24,21 @@
     - name: Composer | Install PHP Composer
       action: shell curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
+    - name: Install NVM
+      action: shell curl https://raw.githubusercontent.com/creationix/nvm/v0.17.0/install.sh | bash
+
+    - name: Install Node and NPM
+      action: shell nvm install 0.10
+
+    - name: Activate Node and NPM
+      action: nvm use 0.10
+
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
-      sudo: yes
       with_items:
         - bower
         - gulp-imagemin
         - gulp
-
-    - name: symlink Node
-      sudo: yes
-      file: path=/usr/bin/node src=/usr/bin/nodejs state=link
 
     - name: Install bundler
       gem: name=bundler
