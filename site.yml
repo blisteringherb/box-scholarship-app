@@ -39,7 +39,7 @@
       register: node-install
 
     - name: Node install debug
-      debug: node-install
+      debug: var=node-install
 
     - name: Debugging
       shell: whoami
