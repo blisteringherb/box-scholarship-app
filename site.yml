@@ -34,16 +34,14 @@
 
     - name: Update npm to version 2
       shell: sudo npm install -g npm@latest-2
+      register: npminstall
 
-    - name: Node install debug
-      debug: var=nodeinstall
+    - name: NPM install debug
+      shell: npm -v
 
     - name: Debugging
       shell: whoami
       register: whoami
-
-    - name: debug
-      debug: var=whoami
 
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
@@ -55,17 +53,4 @@
     - name: Install bundler
       gem: name=bundler
 
-    - name: Create dosomething user
-      user: name=dosomething shell=/bin/bash generate_ssh_key=yes password={{ createpassword }}
-      sudo: true
-      tags: user
-
-    - name: Sudoers | update sudoers file and validate
-      lineinfile: "dest=/etc/sudoers
-        insertafter=EOF
-        line='dosomething ALL=(ALL) NOPASSWD: ALL'
-        regexp='dosomething ALL=(ALL) NOPASSWD: ALL'
-        state=present"
-      sudo: true
-      tags: user
 
