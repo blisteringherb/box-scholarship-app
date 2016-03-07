@@ -27,19 +27,16 @@
     - name: Composer | Install PHP Composer
       action: shell curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-    - name: Install nvm
-      shell: >
-        curl https://raw.githubusercontent.com/creationix/nvm/v0.17.0/install.sh | bash
-        creates=/home/{{ ansible_user_id }}/.nvm/nvm.sh
-
     - name: Install node and set version
       shell: >
-        /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 0.10 && nvm alias default 0.10"
-        creates=/home/{{ ansible_user_id }}/.nvm/alias
-      register: node-install
+        curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - && sudo apt-get install -y nodejs
+      register: nodeinstall
+
+    - name: Update npm to version 2
+      shell: sudo npm install -g npm@latest-2
 
     - name: Node install debug
-      debug: var=node-install
+      debug: var=nodeinstall
 
     - name: Debugging
       shell: whoami
@@ -58,4 +55,17 @@
     - name: Install bundler
       gem: name=bundler
 
+    - name: Create dosomething user
+      user: name=dosomething shell=/bin/bash generate_ssh_key=yes password={{ createpassword }}
+      sudo: true
+      tags: user
+
+    - name: Sudoers | update sudoers file and validate
+      lineinfile: "dest=/etc/sudoers
+        insertafter=EOF
+        line='dosomething ALL=(ALL) NOPASSWD: ALL'
+        regexp='dosomething ALL=(ALL) NOPASSWD: ALL'
+        state=present"
+      sudo: true
+      tags: user
 
