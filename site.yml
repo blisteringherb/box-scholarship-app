@@ -27,26 +27,21 @@
     - name: Composer | Install PHP Composer
       action: shell curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-    - name: Install nvm
-      shell: >
-        curl https://raw.githubusercontent.com/creationix/nvm/v0.17.0/install.sh | bash
-        creates=/home/{{ ansible_user_id }}/.nvm/nvm.sh
-
     - name: Install node and set version
       shell: >
-        /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 0.10 && nvm alias default 0.10"
-        creates=/home/{{ ansible_user_id }}/.nvm/alias
-      register: node-install
+        curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - && sudo apt-get install -y nodejs
+      register: nodeinstall
 
-    - name: Node install debug
-      debug: var=node-install
+    - name: Update npm to version 2
+      shell: sudo npm install -g npm@latest-2
+      register: npminstall
+
+    - name: NPM install debug
+      shell: npm -v
 
     - name: Debugging
       shell: whoami
       register: whoami
-
-    - name: debug
-      debug: var=whoami
 
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
