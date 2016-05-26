@@ -3,26 +3,34 @@
   remote_user: ubuntu
   user: ubuntu
   tasks:
+    - name: Add ppa Repository
+      sudo: yes
+      apt_repository: repo=ppa:ondrej/{{ php.ppa }}
+
     - name: General | Install required packages.
       apt: name={{ item }} state=latest update_cache=yes
       tags: common
       sudo: yes
       with_items:
-        - php5-mcrypt
-        - php5-fpm
-        - php5-cli
-        - php5-curl
+        - php7.0
+        - php7.0-bcmath
+        - php7.0-bz2
+        - php7.0-curl
+        - php7.0-dba
+        - php7.0-dom
+        - php7.0-gd
+        - php7.0-fpm
+        - php7.0-json
+        - php7.0-mcrypt
+        - php7.0-mongo
+        - php7.0-soap
+        - php7.0-readline
+        - php7.0-zip
+        - php7.0-xml
         - git
         - ruby
         - build-essential
         - libssl-dev
-        #- redis
-
-    - name: Enable php5-extensions
-      action: shell sudo php5enmod {{ item }}
-      with_items:
-        - mcrypt
-        - curl
 
     - name: Composer | Install PHP Composer
       action: shell curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
@@ -32,21 +40,11 @@
         curl https://raw.githubusercontent.com/creationix/nvm/v0.17.0/install.sh | bash
         creates=/home/{{ ansible_user_id }}/.nvm/nvm.sh
 
-    - name: Install node and set version
-      shell: >
-        /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 0.10 && nvm alias default 0.10"
-        creates=/home/{{ ansible_user_id }}/.nvm/alias
-      register: node-install
-
-    - name: Node install debug
-      debug: var=node-install
-
-    - name: Debugging
-      shell: whoami
-      register: whoami
-
-    - name: debug
-      debug: var=whoami
+    - script:
+        name: update node
+        code: |-
+          curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+          sudo apt-get install -y nodejs
 
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
