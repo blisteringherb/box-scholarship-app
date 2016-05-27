@@ -3,6 +3,9 @@
   remote_user: ubuntu
   user: ubuntu
   tasks:
+    - name: update node
+      shell: -curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+
     - name: Add ppa Repository
       sudo: yes
       apt_repository: repo=ppa:ondrej/php
@@ -22,29 +25,21 @@
         - php7.0-fpm
         - php7.0-json
         - php7.0-mcrypt
-        - php7.0-mongo
         - php7.0-soap
         - php7.0-readline
         - php7.0-zip
         - php7.0-xml
+        - nodejs
         - git
         - ruby
         - build-essential
         - libssl-dev
 
+    - name: Pecl install mongo
+      shell: pecl install mongodb
+
     - name: Composer | Install PHP Composer
       action: shell curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
-
-    - name: Install nvm
-      shell: >
-        curl https://raw.githubusercontent.com/creationix/nvm/v0.17.0/install.sh | bash
-        creates=/home/{{ ansible_user_id }}/.nvm/nvm.sh
-
-    - script:
-        name: update node
-        code: |-
-          curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-          sudo apt-get install -y nodejs
 
     - name: Install NPM build tools
       npm: name={{ item }} global=yes
