@@ -1,5 +1,5 @@
 name: scholarship
-version: 0.0.9
+version: 0.0.10
 inherits: typester/ubuntu14.04-ansible@1.6.6
 type: service
 platform: ubuntu@14.04
