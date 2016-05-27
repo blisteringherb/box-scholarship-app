@@ -34,6 +34,17 @@
         - ruby
         - build-essential
         - libssl-dev
+        - autoconf
+        - g++
+        - make
+        - openssl
+        - libcurl4-openssl-dev
+        - pkg-config
+        - libsasl2-dev
+        - libpcre3-dev
+
+    - name: Update apt again
+      apt: update_cache=yes upgrade=yes
 
     - name: Pecl install mongo
       shell: pecl install mongodb
