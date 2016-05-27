@@ -16,6 +16,7 @@
       sudo: yes
       with_items:
         - php7.0
+        - php7.0-dev
         - php7.0-bcmath
         - php7.0-bz2
         - php7.0-curl
@@ -47,6 +48,7 @@
       apt: update_cache=yes upgrade=yes
 
     - name: Pecl install mongo
+      sudo: yes
       shell: pecl install mongodb
 
     - name: Composer | Install PHP Composer
