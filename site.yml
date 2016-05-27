@@ -49,10 +49,6 @@
     - name: Update apt again
       apt: update_cache=yes upgrade=yes
 
-    - name: Pecl install mongo
-      sudo: yes
-      shell: pecl install mongodb
-
     - name: Composer | Install PHP Composer
       action: shell curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
