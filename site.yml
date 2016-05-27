@@ -4,7 +4,7 @@
   user: ubuntu
   tasks:
     - name: update node
-      shell: -curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+      shell: curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 
     - name: Add ppa Repository
       sudo: yes
